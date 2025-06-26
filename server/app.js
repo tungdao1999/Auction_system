@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
+const routes = require('./routes');
+const config = require('./config')
 
 app.use(express.json());
 
-// Basic route
-app.get('/', (req, res) => {
+app.use(`${config.app.apiPrefix}`, routes)
+
+// test route
+app.get('/test', (req, res) => {
   res.send('Hello Express!');
 });
 
