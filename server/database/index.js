@@ -1,5 +1,5 @@
 const config = require('../config');
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
   config.db.connection.database,
@@ -17,4 +17,12 @@ sequelize
   .then(() => console.log(`✅ Connected to ${config.db.client.toUpperCase()}`))
   .catch((err) => console.error("❌ Database connection failed:", err));
 
-module.exports = sequelize;
+const models = {
+  User: require('./models/users')(sequelize, DataTypes),
+  // Add more models here later
+};
+
+module.exports = {
+  sequelize,
+  ...models 
+};

@@ -1,16 +1,15 @@
-const { SequelizeAuto } = require('sequelize-auto');
 require('dotenv').config();
+const SequelizeAuto = require('sequelize-auto');
 
-console.log("DB_NAME", process.env.DB_NAME)
 const auto = new SequelizeAuto(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
     host: process.env.DB_HOST,
-    dialect: 'mysql', 
-    port: process.env.DB_PORT,
-    directory: './models',       
+    dialect: process.env.DB_DIALECT || 'mysql',
+    port: process.env.DB_PORT || 3306,
+    directory: 'server/database/models',
     additional: {
       timestamps: false
     }
@@ -18,11 +17,6 @@ const auto = new SequelizeAuto(
 );
 
 auto.run(err => {
-
-  if (err) {
-    throw err;
-  };
+  if (err) throw err;
   console.log('✔️ Models generated successfully');
 });
-
-
