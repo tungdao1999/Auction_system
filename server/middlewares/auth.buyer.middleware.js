@@ -1,6 +1,6 @@
 const authToken = require('../common/auth-token');
 
-exports.authenticate = (req, res, next) => {
+module.exports = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
 

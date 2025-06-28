@@ -1,14 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('sequelizemeta', {
-    name: {
-      type: DataTypes.STRING(255),
+  return sequelize.define('buyer', {
+    id: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       primaryKey: true
+    },
+    userId: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
-    tableName: 'sequelizemeta',
+    tableName: 'buyer',
     timestamps: false,
     indexes: [
       {
@@ -16,15 +24,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "name" },
+          { name: "id" },
         ]
       },
       {
-        name: "name",
-        unique: true,
+        name: "userId",
         using: "BTREE",
         fields: [
-          { name: "name" },
+          { name: "userId" },
         ]
       },
     ]

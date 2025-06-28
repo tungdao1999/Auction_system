@@ -7,7 +7,7 @@ const loginBuyer = async (req, res) => {
         const { identifier, password } = req.body;
         console.log('Login attempt:', { identifier, password });
         const result = await authService.login(identifier, password, Roles.BUYER);
-        res.status(200).json(result);
+        res.status(200).json({ token: result});
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -18,7 +18,7 @@ const loginSeller = async (req, res) => {
     try {
         const { identifier, password } = req.body;
         const result = await authService.login(identifier, password, Roles.SELLER);
-        res.status(200).json(result);
+        res.status(200).json({ token: result});
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -28,7 +28,6 @@ const loginSeller = async (req, res) => {
 const registerBuyer = async (req, res) => {
     try {
         const buyerData = req.body;
-        console.log('Buyer Data:', buyerData);
         const result = await authService.registerBuyer(buyerData);
         res.status(201).json(result);
     } catch (err) {

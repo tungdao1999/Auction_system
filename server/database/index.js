@@ -1,4 +1,5 @@
 const config = require('../config');
+const { initModels } = require('./models/init-models');
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -17,8 +18,16 @@ sequelize
   .then(() => console.log(`✅ Connected to ${config.db.client.toUpperCase()}`))
   .catch((err) => console.error("❌ Database connection failed:", err));
 
+
+const init_model = initModels(sequelize);
 const models = {
-  User: require('./models/users')(sequelize, DataTypes),
+  User: init_model.users,
+  Admin: init_model.admin,
+  Buyer: init_model.buyer,
+  Seller: init_model.seller,
+  Item: init_model.item,
+  Auction: init_model.auction,
+  BidHistory: init_model.bid_history,
   // Add more models here later
 };
 
