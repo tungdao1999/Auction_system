@@ -1,14 +1,16 @@
 const auctionRepository = require('../repositories/auction.repository');
 const userRepository = require('../repositories/user.repository');
 const itemRepository = require('../repositories/item.repository');
+const { ItemStatus } = require('../common/const');
 
 const getAllAuctions = async () => {
     return await auctionRepository.getAllAuctions();
 }
 
 const createAuction = async (auctionData, sellerId) => { 
+    console.log('Creating auction with data:', auctionData, 'for seller ID:', sellerId);
     if (!auctionData || !auctionData.itemId 
-        || !auctionData.startPrice || !auctionData.startTime || !auctionData.endTime) {
+        || !auctionData.startingPrice || !auctionData.startTime) {
         throw new Error('Invalid auction data');
     }
 
@@ -18,13 +20,15 @@ const createAuction = async (auctionData, sellerId) => {
         throw new Error('Seller not found');
     }
     // validate item
-    const item = await itemRepository.findItemById(auctionData.itemId);
+    const item = await itemRepository.findAvailableItemById(auctionData.itemId, sellerId);
     if (!item) {
         throw new Error('Item not found');
     }
 
     // create auction
-    auctionData.sellerId = seller.id; // Associate auction with seller
+    auctionData.sellerId = sellerId; // Associate auction with seller
+    auctionData.status ? 
+        auctionData.status : auctionData.status = ItemStatus.AVAILABLE; // Default status to 'ONGOING' if not provided
     return await auctionRepository.createAuction(auctionData);
 }
 

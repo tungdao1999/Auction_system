@@ -28,6 +28,7 @@ const models = {
   Item: init_model.item,
   Auction: init_model.auction,
   BidHistory: init_model.bid_history,
+  Bid: init_model.bid,
   // Add more models here later
 };
 

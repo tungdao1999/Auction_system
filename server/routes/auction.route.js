@@ -4,3 +4,5 @@ const auctionController = require('../controllers/auction.controller');
 const sellerAuthenticate = require('../middlewares/auth.seller.middleware');
 
 router.post('/createAuction', sellerAuthenticate, auctionController.createAuction);
+
+module.exports = router;

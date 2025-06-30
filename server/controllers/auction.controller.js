@@ -1,5 +1,6 @@
 const auctionService = require('../services/auction.service');
 
+// Create
 const createAuction = async (req, res) => {
     try {
         const auctionData = req.body;

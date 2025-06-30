@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     startTime: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: false
     },
     endTime: {
       type: DataTypes.DATE,
@@ -45,6 +45,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'seller',
         key: 'id'
       }
+    },
+    title: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    presetDuration: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,

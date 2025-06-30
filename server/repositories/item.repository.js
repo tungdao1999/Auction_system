@@ -1,6 +1,7 @@
 const { Item, sequelize } = require('../database/index');
 const { Op } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
+const { ItemStatus } = require('../common/const');
 
 const createItem = async (itemData) => {
     return await sequelize.transaction(async (t) => {
@@ -26,8 +27,19 @@ const findItemById = async (id) => {
     })
 }
 
+const findAvailableItemById = async (id, sellerId) => {
+    return await Item.findOne({
+        where: {
+            id: id,
+            sellerId: sellerId,
+            status: ItemStatus.AVAILABLE
+        }
+    });
+}
+
 module.exports = { 
     createItem,
     getAllItems,
-    findItemById
+    findItemById,
+    findAvailableItemById
 }
