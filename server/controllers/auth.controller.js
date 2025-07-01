@@ -5,7 +5,6 @@ const authService = require('../services/user.service');
 const loginBuyer = async (req, res) => {
     try {
         const { identifier, password } = req.body;
-        console.log('Login attempt:', { identifier, password });
         const result = await authService.login(identifier, password, Roles.BUYER);
         res.status(200).json({ token: result});
     } catch (err) {
