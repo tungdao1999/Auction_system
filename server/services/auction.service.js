@@ -8,7 +8,6 @@ const getAllAuctions = async () => {
 }
 
 const createAuction = async (auctionData, sellerId) => { 
-    console.log('Creating auction with data:', auctionData, 'for seller ID:', sellerId);
     if (!auctionData || !auctionData.itemId 
         || !auctionData.startingPrice || !auctionData.startTime) {
         throw new Error('Invalid auction data');
