@@ -10,7 +10,8 @@ const createBid = async (bidData, buyerId) => {
 
     // Validate auction
     const auction = await auctionRepository.findAuctionById(bidData.auctionId);
-    if (!auction || !auction.status !== AuctionStatus.ONGOING) {
+    console.log('Auction:', auction.status, AuctionStatus.ONGOING);
+    if (!auction || !auction.status === AuctionStatus.ONGOING) {
         throw new Error('Auction not valid');
     }
 

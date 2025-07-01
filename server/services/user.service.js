@@ -14,7 +14,7 @@ const login = async ( identifier, password, role ) => {
     const buyer = await userRepository.findBuyerByUserId(user.id);
      return AuthToken.generateAuthToken({
       id: buyer.id,
-      role: Roles.SELLER,
+      role: Roles.BUYER,
       email: user.email,
       phone: user.phone,
      });

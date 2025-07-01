@@ -20,7 +20,16 @@ const createAuction = async (auctionData) => {
     });
 }
 
+const findAuctionById = async (auctionId) => {
+    return await Auction.findOne({
+        where: {
+            id: auctionId,
+        },
+    });
+}
+
 module.exports = { 
     getAllAuctions,
-    createAuction
+    createAuction,
+    findAuctionById
 }

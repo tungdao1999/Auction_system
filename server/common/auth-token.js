@@ -24,5 +24,4 @@ class AuthToken {
     }
 }
 
-
 module.exports = AuthToken;
