@@ -2,6 +2,7 @@ const config = require('../config');
 const { initModels } = require('./models/init-models');
 const { Sequelize, DataTypes } = require("sequelize");
 
+console.log("Initializing database connection...", config.db.connection);
 const sequelize = new Sequelize(
   config.db.connection.database,
   config.db.connection.user,
