@@ -9,10 +9,11 @@ const login = async ( identifier, password, role ) => {
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error('Invalid password');
-
+  const result = {}
   if (role == Roles.BUYER) {
     const buyer = await userRepository.findBuyerByUserId(user.id);
-     return AuthToken.generateAuthToken({
+     result.userId = buyer.id;
+     result.token = AuthToken.generateAuthToken({
       id: buyer.id,
       role: Roles.BUYER,
       email: user.email,
@@ -21,14 +22,16 @@ const login = async ( identifier, password, role ) => {
   }
   if (role == Roles.SELLER) { 
     const seller = await userRepository.findSellerByUserId(user.id);
-     return AuthToken.generateAuthToken({
+    result.userId = seller.id;
+     result.token = AuthToken.generateAuthToken({
       id: seller.id,
       role: Roles.SELLER,
       email: user.email,
       phone: user.phone,
      });
   }
-  return AuthToken.generateAuthToken(user);
+
+  return result;
 };
 
 const registerBuyer = async ({ email, phone, password, firstName, lastName }) => {
