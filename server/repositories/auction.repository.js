@@ -28,8 +28,26 @@ const findAuctionById = async (auctionId) => {
     });
 }
 
+const getRunningAuction = async () => {
+    const [results] = await sequelize.query(
+        `SELECT auc.id, auc.itemId, auc.description, auc.startTime,
+                auc.startingPrice, auc.title,
+                auc.itemId, auc.sellerId,
+                it.name as itemName, us.LastName as sellerName
+        
+        FROM Auction auc
+        JOIN item it on auc.itemId = it.id
+        JOIN seller s on auc.sellerId = s.id
+        join users us on s.userId = us.id
+        WHERE auc.status = 'ongoing' 
+        ORDER BY auc.startTime DESC LIMIT 1`
+    );
+    return results || null;
+};
+
 module.exports = { 
     getAllAuctions,
     createAuction,
-    findAuctionById
+    findAuctionById,
+    getRunningAuction
 }

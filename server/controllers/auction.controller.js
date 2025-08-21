@@ -13,6 +13,16 @@ const createAuction = async (req, res) => {
     }
 };
 
+const getRunningAuction = async (req, res) => {
+    try {
+        const runningAuction = await auctionService.getRunningAuction();
+        res.status(200).json(runningAuction);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 module.exports = {
-    createAuction
+    createAuction,
+    getRunningAuction
 };

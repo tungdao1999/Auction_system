@@ -3,7 +3,6 @@ const itemService = require('../services/item.service');
 // Get all items
 const getAllItems = async (req, res) => {
     try {
-        console.log('Fetching all items');
         const items = await itemService.getAllItems();
         res.status(200).json(items);
     } catch (err) {

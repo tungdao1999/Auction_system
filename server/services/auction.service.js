@@ -31,7 +31,12 @@ const createAuction = async (auctionData, sellerId) => {
     return await auctionRepository.createAuction(auctionData);
 }
 
+const getRunningAuction = async () => {
+    return await auctionRepository.getRunningAuction();
+}
+
 module.exports = {
     getAllAuctions,
-    createAuction
+    createAuction,
+    getRunningAuction
 }
