@@ -33,14 +33,14 @@ const getRunningAuction = async () => {
         `SELECT auc.id, auc.itemId, auc.description, auc.startTime,
                 auc.startingPrice, auc.title,
                 auc.itemId, auc.sellerId,
-                it.name as itemName, us.LastName as sellerName
-        
+                it.name as itemName, us.LastName as sellerName,
+                it.image as itemImage
         FROM Auction auc
         JOIN item it on auc.itemId = it.id
         JOIN seller s on auc.sellerId = s.id
         join users us on s.userId = us.id
         WHERE auc.status = 'ongoing' 
-        ORDER BY auc.startTime DESC LIMIT 1`
+        ORDER BY auc.startTime DESC`
     );
     return results || null;
 };
