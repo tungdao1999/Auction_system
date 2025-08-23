@@ -53,6 +53,14 @@ module.exports = function(sequelize, DataTypes) {
     presetDuration: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    mediaLink: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    mediaType: {
+      type: DataTypes.STRING(10),
+      allowNull: true
     }
   }, {
     sequelize,

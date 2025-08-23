@@ -1,7 +1,9 @@
 const auctionRepository = require('../repositories/auction.repository');
 const userRepository = require('../repositories/user.repository');
 const itemRepository = require('../repositories/item.repository');
+const bidRepository = require('../repositories/bid.repository');
 const { ItemStatus } = require('../common/const');
+const bid = require('../database/models/bid');
 
 const getAllAuctions = async () => {
     return await auctionRepository.getAllAuctions();
@@ -35,8 +37,18 @@ const getRunningAuction = async () => {
     return await auctionRepository.getRunningAuction();
 }
 
+const getAuction = async (auctionId) => {
+    const auction = await auctionRepository.findAuctionById(auctionId);
+    if (!auction) {
+        throw new Error('Auction not found');
+    }
+    auction.biddings = await bidRepository.findBidsByAuctionId(auctionId);
+    return auction;
+}
+
 module.exports = {
     getAllAuctions,
     createAuction,
-    getRunningAuction
+    getRunningAuction,
+    getAuction
 }

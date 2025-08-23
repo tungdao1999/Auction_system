@@ -4,7 +4,7 @@ const auctionService = require('../services/auction.service');
 const createAuction = async (req, res) => {
     try {
         const auctionData = req.body;
-        const sellerId = req.user.id; // Assuming the seller ID is stored in req.user
+        const sellerId = req.user.id; 
         const newAuction = await auctionService.createAuction(auctionData, sellerId);
         res.status(201).json(newAuction);
     } catch (err) {
@@ -22,7 +22,18 @@ const getRunningAuction = async (req, res) => {
     }
 };
 
+const getAuction = async (req, res) => {
+    try {
+        const auctionId = req.params.id;
+        const auction = await auctionService.getAuction(auctionId);
+        res.status(200).json(auction);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 module.exports = {
     createAuction,
-    getRunningAuction
+    getRunningAuction,
+    getAuction
 };

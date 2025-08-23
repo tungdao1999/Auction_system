@@ -6,5 +6,6 @@ const buyerAuthenticate = require('../middlewares/auth.buyer.middleware');
 
 router.post('/createAuction', sellerAuthenticate, auctionController.createAuction);
 router.get('/getRunningAuction', buyerAuthenticate, auctionController.getRunningAuction);
+router.get('/getAuction', buyerAuthenticate, auctionController.getAuction);
 
 module.exports = router;

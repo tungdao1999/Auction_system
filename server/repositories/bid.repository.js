@@ -19,7 +19,17 @@ const findHighestBidByAuctionId = async (auctionId) => {
     });
 }
 
+const findBidsByAuctionId = async (auctionId) => {
+    return await Bid.findAll({
+        where: {
+            auctionId: auctionId,
+        },
+        order: [['createdAt', 'DESC']],
+    });
+}
+
 module.exports = { 
     createBid,
-    findHighestBidByAuctionId
+    findHighestBidByAuctionId,
+    findBidsByAuctionId
 }

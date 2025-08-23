@@ -10,7 +10,6 @@ module.exports = (req, res, next) => {
 
   try {
     const decoded = authToken.verifyAuthToken(token);
-    console.log("decode", decoded);
     if (!decoded || !decoded.role || decoded.role !== Roles.BUYER) {
       return res.status(403).json({ error: 'Forbidden: Buyer access only' });
     }
