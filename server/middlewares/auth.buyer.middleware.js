@@ -4,7 +4,6 @@ const { Roles } = require('../common/const');
 module.exports = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
-  console.log("recieved token", token);
 
   if (!token) return res.status(401).json({ error: 'Token missing' });
 

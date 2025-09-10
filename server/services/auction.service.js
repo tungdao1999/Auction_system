@@ -39,6 +39,7 @@ const getRunningAuction = async () => {
 
 const getAuction = async (auctionId) => {
     const auction = await auctionRepository.findAuctionById(auctionId);
+    console.log('auction details:', auction);
     if (!auction) {
         throw new Error('Auction not found');
     }

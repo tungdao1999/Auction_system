@@ -30,6 +30,7 @@ const models = {
   Auction: init_model.auction,
   BidHistory: init_model.bid_history,
   Bid: init_model.bid,
+  AuctionItem : init_model.auction_item
   // Add more models here later
 };
 

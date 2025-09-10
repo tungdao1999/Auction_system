@@ -12,11 +12,15 @@ const auto = new SequelizeAuto(
     directory: 'server/database/models',
     additional: {
       timestamps: false
-    }
+    },
+    logging: console.log
   }
 );
 
 auto.run(err => {
-  if (err) throw err;
+  if (err) {
+    console.log("error:", err);
+    throw err;
+  }
   console.log('✔️ Models generated successfully');
 });

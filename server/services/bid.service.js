@@ -1,6 +1,6 @@
 const bidRepository = require('../repositories/bid.repository');
 const auctionRepository = require('../repositories/auction.repository');
-const { AuctionStatus } = require('../common/const');
+const { AuctionStatus, BidStatus } = require('../common/const');
 
 const createBid = async (bidData, buyerId) => { 
     // Validate bid data
@@ -15,14 +15,14 @@ const createBid = async (bidData, buyerId) => {
     }
 
     // highest bid logic
-    const highestBid = await bidRepository.findHighestBidByAuctionId(bidData.auctionId);
-    if (highestBid && bidData.price <= highestBid.price) {
+    const highestPrice = await bidRepository.findHighestBidByAuctionId(bidData.auctionId);
+    if (bidData.price <= highestPrice) {
         throw new Error('Bid price must be higher than the current highest bid');
     }
 
     // Create bid
     bidData.buyerId = buyerId; // Associate bid with buyer
-    bidData.status = bidData.status || 'PENDING';
+    bidData.status = bidData.status || BidStatus.ACCEPTED;
     return await bidRepository.createBid(bidData);
 }
 

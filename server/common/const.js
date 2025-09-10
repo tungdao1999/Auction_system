@@ -14,6 +14,7 @@ const BidStatus = {
     PENDING: 'pending',
     ACCEPTED: 'accepted',
     REJECTED: 'rejected',
+    WINNER: 'winner',
 }
 
 const AuctionStatus = {
@@ -23,6 +24,12 @@ const AuctionStatus = {
     CANCELLED: 'cancelled',
     FAILED: 'failed',
 }
+
+const AuctionItemStatus = {
+    ACTIVE: 'active',
+    INACTIVE: 'inactive',
+    ADDED: 'added', 
+}
 module.exports = {
-    Roles, ItemStatus, AuctionStatus, BidStatus
+    Roles, ItemStatus, AuctionStatus, BidStatus, AuctionItemStatus
 };

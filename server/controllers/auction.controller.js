@@ -8,7 +8,6 @@ const createAuction = async (req, res) => {
         const newAuction = await auctionService.createAuction(auctionData, sellerId);
         res.status(201).json(newAuction);
     } catch (err) {
-        console.error('Error creating auction:', err.message);
         res.status(400).json({ message: err.message });
     }
 };
@@ -24,10 +23,14 @@ const getRunningAuction = async (req, res) => {
 
 const getAuction = async (req, res) => {
     try {
-        const auctionId = req.params.id;
+        const auctionId = req.params.auctionId;
+        if (!auctionId) {
+            return res.status(400).json({ message: 'Invalid auction ID' });
+        }
         const auction = await auctionService.getAuction(auctionId);
         res.status(200).json(auction);
     } catch (err) {
+        console.log("err", err);
         res.status(400).json({ message: err.message });
     }
 };

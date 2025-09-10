@@ -1,5 +1,6 @@
 const itemRepository = require('../repositories/item.repository');
 const userRepository = require('../repositories/user.repository');
+const auctionRepository = require('../repositories/auction.repository');
 
 const createItem = async (itemData, sellerId) => {
     // Validate seller ID
@@ -21,7 +22,19 @@ const getAllItems = async () => {
     return await itemRepository.getAllItems();
 }
 
+const getRelatedItems = async (auctionId) => {
+    if(!auctionId) {
+        throw new Error('Invalid auction ID');
+    }
+    const auction = await auctionRepository.findAuctionById(auctionId);
+    if (!auction) {
+        throw new Error('Auction not found');
+    }
+    return await itemRepository.getRelatedItems(auctionId);
+}
+
 module.exports = { 
     createItem,
-    getAllItems
+    getAllItems,
+    getRelatedItems
 }

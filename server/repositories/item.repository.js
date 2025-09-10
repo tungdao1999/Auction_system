@@ -1,4 +1,4 @@
-const { Item, sequelize } = require('../database/index');
+const { Item, sequelize, AuctionItem } = require('../database/index');
 const { Op } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { ItemStatus } = require('../common/const');
@@ -37,9 +37,23 @@ const findAvailableItemById = async (id, sellerId) => {
     });
 }
 
+const getRelatedItems = async (auctionId) => {
+    const result = await Item.findAll({
+        attributes: ['id', 'name', 'description', 'sell_price', 'image', 'status'],
+        include: [{
+            model: AuctionItem,
+            as: 'auction_items',
+            where: { auctionId },
+            attributes: []
+        }]
+    });
+    return result;
+}
+
 module.exports = { 
     createItem,
     getAllItems,
     findItemById,
-    findAvailableItemById
+    findAvailableItemById,
+    getRelatedItems
 }
