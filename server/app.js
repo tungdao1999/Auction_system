@@ -3,12 +3,14 @@ const app = express();
 const routes = require('./routes');
 const config = require('./config')
 const cors = require('cors');
+const wsModule = require('./websocket');
 
+wsModule.setUpWs();
 app.use(express.json());
 
 var corsOptions = {
   origin: process.env.UI_ORIGIN || 'http://localhost:3000',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200
 }
 
 app.use(`${config.app.apiPrefix}`, cors(corsOptions), routes);

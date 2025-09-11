@@ -21,6 +21,7 @@
     "mysql2": "^3.14.1",
     "sequelize": "^6.37.7",
     "uuid": "^11.1.0",
+    "ws": "^8.18.3",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
