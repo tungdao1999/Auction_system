@@ -6,6 +6,7 @@ const users = require('../database/models/users');
 
 // This function finds a user by email or phone (identifier) number and role
 const findUser = async (identifier) => {
+    console.log("identifier", identifier);
     return await User.findOne({
         where: {
             [Op.or]: [

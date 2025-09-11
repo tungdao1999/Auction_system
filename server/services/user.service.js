@@ -30,7 +30,7 @@ const login = async ( identifier, password, role ) => {
       phone: user.phone,
      });
   }
-
+  console.log("user", user);
   return result;
 };
 
