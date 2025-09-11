@@ -1,0 +1,10 @@
+ .dropdown-menu-list .dropdown-item {
+     color: #fff;
+     background: transparent;
+     transition: 'background 0.2s';
+ }
+
+ .dropdown-menu-list .dropdown-item:hover {
+     background: #e0e0e0;
+     color: #222;
+ }

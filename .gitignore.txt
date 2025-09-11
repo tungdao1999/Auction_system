@@ -1,0 +1,55 @@
+# =========================
+# Global ignores
+# =========================
+.DS_Store
+.vscode/launch.json
+
+# =========================
+# Node server ignores
+# =========================
+node_server/node_modules
+node_server/build
+node_server/npm-debug.log
+node_server/.env
+node_server/.env.production
+
+# =========================
+# Next.js client ignores
+# =========================
+next_client/node_modules
+next_client/.pnp
+next_client/.pnp.*
+next_client/.yarn/*
+!next_client/.yarn/patches
+!next_client/.yarn/plugins
+!next_client/.yarn/releases
+!next_client/.yarn/versions
+
+# Testing
+next_client/coverage
+
+# Next.js build
+next_client/.next/
+next_client/out/
+
+# Production build
+next_client/build
+
+# Misc
+next_client/*.pem
+
+# Debug logs
+next_client/npm-debug.log*
+next_client/yarn-debug.log*
+next_client/yarn-error.log*
+next_client/.pnpm-debug.log*
+
+# Env files
+next_client/.env*
+
+# Vercel deployment
+next_client/.vercel
+
+# TypeScript artifacts
+next_client/*.tsbuildinfo
+next_client/next-env.d.ts
