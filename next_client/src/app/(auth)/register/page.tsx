@@ -1,9 +1,9 @@
+// filepath: c:\Project\nextjs-admin-dashboard-main\nextjs-auction\src\app\(auth)\register\page.tsx
+'use client';
 import { useState } from 'react';
 import React from 'react';
 import Link from 'next/link';
 
-// filepath: c:\Project\nextjs-admin-dashboard-main\nextjs-auction\src\app\(auth)\register\page.tsx
-'use client';
 
 export default function RegisterPage() {
     const [firstName, setFirstName] = useState('');

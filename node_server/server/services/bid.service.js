@@ -16,7 +16,7 @@ const createBid = async (bidData, buyerId) => {
         throw new Error('Auction not valid');
     }
 
-    const buyer = await userRepository.findBuyerByUserId(buyerId);
+    const buyer = await userRepository.findBuyerById(buyerId);
     if (!buyer) {
         throw new Error('Buyer not found');
     }
@@ -30,13 +30,13 @@ const createBid = async (bidData, buyerId) => {
     // Create bid
     bidData.buyerId = buyerId; // Associate bid with buyer
     bidData.status = bidData.status || BidStatus.ACCEPTED;
-    const createdBid = await bidRepository.createBid(bidData);
-    createdBid.buyerId = buyerId;
-    createdBid.buyerName = buyer.firstName + ' ' + buyer.lastName;
+    const createdBid  = await bidRepository.createBid(bidData);
 
     // Notify all subscribers about the new bid
     ws.sendMessageToTopic(`bid-${bidData.auctionId}-${bidData.itemId}`, {
-        createdBid 
+        id: createdBid.id,
+        price: createdBid.price,
+        buyerName: `${buyer.firstName} ${buyer.lastName}`
     });
 
     return createdBid;

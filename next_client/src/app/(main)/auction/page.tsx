@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapModal from "@/components/modal";
 import Bid from "./component/bid";
@@ -23,6 +23,11 @@ export default function AuctionPage() {
     const [selectedAuction, setSelectedAuction] = useState<Auction>();
     const [isShowBid, setIsShowBid] = useState(false);
 
+    const onClickBid = useCallback((auction: Auction) => {
+        setSelectedAuction(auction);
+        setIsShowBid(true);
+    }, []);
+
     useEffect(() => {
         async function fetchAuction() {
             try {
@@ -42,34 +47,6 @@ export default function AuctionPage() {
         }
         fetchAuction();
     }, []);
-
-    const updateSelectedAuction = async () => {
-        setIsShowBid(false);
-        try {
-            if (selectedAuction?.id) {
-                const axiosInstance = await createClientAxios();
-                axiosInstance.get(`/api/auction/${selectedAuction.id}`)
-                    .then((response) => {
-                        if (response.status === 200) {
-                            const updatedAuction = response.data;
-                            setSelectedAuction(updatedAuction);
-                            setAuctions((prevAuctions) =>
-                                prevAuctions.map((auc) =>
-                                    auc.id === updatedAuction.id ? updatedAuction : auc
-                                )
-                            );
-                        } else {
-                            console.log("Failed to reload auction");
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Failed to reload auction", error);
-                    });
-            }
-        } catch (error) {
-            console.error("Failed to reload auction", error);
-        }
-    }
 
     return (
         <div className="container py-4">
@@ -123,17 +100,14 @@ export default function AuctionPage() {
                     <AuctionCard
                         key={auc.id}
                         auction={auc}
-                        onBidClick={(auction) => {
-                            setSelectedAuction(auction);
-                            setIsShowBid(true);
-                        }}
+                        onBidClick={onClickBid}
                     />
                 ))}
             </div>
             <BootstrapModal
                 id="bidModal"
                 header="Place your bid"
-                body={selectedAuction?.id && <Bid auctionId={selectedAuction?.id} onBidPlaced={updateSelectedAuction} />}
+                body={selectedAuction?.id && <Bid auctionId={selectedAuction?.id}/>}
                 size="xl"
                 show={isShowBid}
                 onClose={() => setIsShowBid(false)}

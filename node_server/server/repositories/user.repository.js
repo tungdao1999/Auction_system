@@ -39,6 +39,12 @@ const findBuyerByUserId = async (userId) => {
     });
 }
 
+const findBuyerById = async (id) => {
+    return await User.findOne({ 
+        include: [{ model: Buyer, as: 'buyers', where: { id: id } }],
+    });
+}
+
 // This function finds a user by email
 const findSellerByEmail = async (email) => {
     return await User.findOne({ 
@@ -99,5 +105,6 @@ module.exports = {
     findSellerByPhone,
     findSellerById,
     findSellerByUserId,
-    createUser
+    createUser,
+    findBuyerById
 };

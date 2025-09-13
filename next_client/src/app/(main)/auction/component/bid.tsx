@@ -46,9 +46,8 @@ export default function Bid({ auctionId }: { auctionId: string }) {
         sendMessage(JSON.stringify({ action: "subscribe", topic }));
 
         receiveMessage((data) => {
-            console.log("WebSocket message received:", data);
             if (data.topic === topic) {
-                const newBid = data.message.createdBid;
+                const newBid = data.message;
                 console.log("Received new bid via WebSocket:", newBid);
                 auctionDetails?.biddings.unshift(newBid);
                 setAuctionDetails({ ...auctionDetails! });

@@ -34,4 +34,4 @@ const AuctionCard: React.FC<AuctionCardProps> = ({ auction, onBidClick }) => (
   </div>
 );
 
-export default AuctionCard;
+export default React.memo(AuctionCard);

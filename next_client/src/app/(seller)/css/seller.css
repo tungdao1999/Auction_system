@@ -1,0 +1,12 @@
+.max-w-2xl {
+  max-width: 1536px;
+}
+.p-2xl-10 {
+  padding: 2.5rem;
+}
+
+@media (min-width: 1536px) {
+  .p-2xl-10 {
+    padding: 2.5rem !important;
+  }
+}
