@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { LoginParams } from '../param';
+import { LoginParams } from "../param";
 
 export async function POST(request: Request) {
     const loginParams: LoginParams = await request.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/loginBuyer`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/loginSeller`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

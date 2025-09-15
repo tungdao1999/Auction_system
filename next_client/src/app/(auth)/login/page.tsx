@@ -1,8 +1,11 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
+    const searchParams = useSearchParams();
+    const role = searchParams.get('role') || 'buyer';
     const [identifier, setIdentifier] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [remember, setRemember] = React.useState(false);
@@ -14,7 +17,7 @@ export default function LoginPage() {
             password,
         };
 
-        const response = await fetch('/api/auth/loginbuyer', {
+        const response = await fetch(`/api/auth/login${role}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,8 +28,8 @@ export default function LoginPage() {
         if (response.ok) {
             const data = await response.json();
             // Assuming the token is returned as data.token
-            localStorage.setItem('auction_token_buyer', data.token);
-            window.location.href = '/auction';
+            localStorage.setItem(`auction_token_${role}`, data.token);
+            window.location.href = `/${role}/auction`;
         } else {
             alert('Login failed. Please check your credentials.');
         }

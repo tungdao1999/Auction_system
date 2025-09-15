@@ -17,7 +17,7 @@ const categories = [
     "Books",
 ];
 
-export default function AuctionPage() {
+export default function BuyerAuctionPage() {
 
     const [auctions, setAuctions] = useState<Auction[]>([]);
     const [selectedAuction, setSelectedAuction] = useState<Auction>();

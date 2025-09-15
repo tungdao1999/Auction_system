@@ -2,6 +2,8 @@ import { PropsWithChildren } from "react";
 import { Providers } from "../providers";
 import { SidebarProvider } from "./sidebar/sidebar-context";
 import './css/seller.css';
+import NextTopLoader from "nextjs-toploader";
+import SellerSidebar from "./sidebar";
 
 export default function SellerLayout({
     children,
@@ -11,7 +13,7 @@ export default function SellerLayout({
             <SidebarProvider>
                 <NextTopLoader color="#5750F1" showSpinner={false} />
                 <div className="d-flex min-vh-100">
-                    <SideBar/>
+                    <SellerSidebar />
                     <div className="mx-auto w-100 container-xxl overflow-hidden p-4 p-md-4 p-xxl-5">
                         {children}
                     </div>

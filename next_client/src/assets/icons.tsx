@@ -38,3 +38,67 @@ export const IconUser = ({ className }: IconProps) => {
         </svg>
     );
 }
+
+export const IconAuctionHammer = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83-3.54-3.54c-.39-.39-1.02-.39-1.41 0L2.29 7.13c-.39.39-.39 1.02 0 1.41l3.54 3.54L4.71 14H2v2h3v3h2v-3h3v-2H7.41l1.83-1.83 3.54 3.54c.39.39 1.02.39 1.41 0l7.34-7.34c.39-.39.39-1.02 0-1.41zM6.41 8L8 6.41l1.59 1.59L8 10.59 6.41 8zm10.83 10.83L9.71 12.29l1.59-1.59 7.54 7.54-1.59 1.59z" fill="currentColor"/>
+    </svg>
+    );
+}
+
+export const IconWarehouse = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6h-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM4 4h12v16H4V4zm16 12h-4v-4h4v4zm0-6h-4V8h4v2z" fill="currentColor"/>
+            </svg>
+    );
+}
+
+export const IconOrders = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6h-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM4 4h12v16H4V4zm16 12h-4v-4h4v4zm0-6h-4V8h4v2z" fill="currentColor"/>
+        </svg>
+    );
+}
+
+export const IconDashboard = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" fill="currentColor"/>
+        </svg>
+    );
+}
+
+export const IconProducts = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6h-2V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-2h2c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM4 4h12v16H4V4zm16 12h-4v-4h4v4zm0-6h-4V8h4v2z" fill="currentColor"/>
+        </svg>
+    );
+}
+
+export const IconMessages = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM4 4h16v12H4V4zm0 16v-4h16v4H4z" fill="currentColor"/>
+        </svg>
+    );
+}
+
+export const IconSettings = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.43 12.98c.04-.32.07-.65.07-.98s-.03-.66-.07-.98l2.11-1.65a.5.5 0 0 0 .12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1a7.03 7.03 0 0 0-1.7-.98l-.38-2.65A.5.5 0 0 0 14 2h-4a.5.5 0 0 0-.5.42l-.38 2.65a7.03 7.03 0 0 0-1.7.98l-2.49-1a.5.5 0 0 0-.61.22l-2 3.46a.5.5 0 0 0 .12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65a.5.5 0 0 0-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.39 1.09.72 1.7.98l.38 2.65A.5.5 0 0 0 10 22h4a.5.5 0 0 0 .5-.42l.38-2.65a7.03 7.03 0 0 0 1.7-.98l2.49 1a.5.5 0 0 0 .61-.22l2-3.46a.5.5 0 0 0-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z" fill="currentColor"/>
+        </svg>
+    );
+}
+
+export const IConSidebarToggle = ({ className }: IconProps) => {
+    return (
+        <svg width="24" height="24" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/>
+        </svg>
+    );
+}
