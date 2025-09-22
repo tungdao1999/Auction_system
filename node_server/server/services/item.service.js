@@ -33,8 +33,16 @@ const getRelatedItems = async (auctionId) => {
     return await itemRepository.getRelatedItems(auctionId);
 }
 
+const getItemBySeller = async (sellerId) => {
+    if (!sellerId) {
+        throw new Error('Invalid seller ID');
+    }
+    return await itemRepository.findItemsBySellerId(sellerId);
+}
+
 module.exports = { 
     createItem,
     getAllItems,
+    getItemBySeller,
     getRelatedItems
 }

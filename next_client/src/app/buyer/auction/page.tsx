@@ -4,7 +4,7 @@ import React, { use, useCallback, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BootstrapModal from "@/components/modal";
 import Bid from "./component/bid";
-import { Auction } from "./types/auction";
+import { Auction } from "@/app/entities/auction";
 import { createClientAxios } from "@/lib/axiosClient";
 import AuctionCard from "./component/auctionCard";
 

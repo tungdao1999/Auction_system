@@ -1,18 +1,20 @@
+import { Item } from "./item";
+
 export interface Auction {
     id:string;
-    itemId: string;
     description: string;
     startTime: string;
     startingPrice: number;
     highestBid: number;
     title: string;
     sellerId: string;
-    itemName: string;
     sellerName: string;
     itemImage?: string;
     mediaLink?: string;
     mediaType?: "image" | "video";
+    presetDuration: number; // in minutes
     biddings: Bidding[];
+    items: Item[];
 }
 
 export interface Bidding {

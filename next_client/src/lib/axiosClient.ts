@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function createClientAxios() {
+export function createClientAxios(role: 'buyer' | 'seller' | 'admin' = 'buyer') {
     if (!process.env.NEXT_PUBLIC_BACKEND_URL) {
         throw new Error("NEXT_PUBLIC_BACKEND_URL is not defined");
     }
@@ -11,9 +11,9 @@ export function createClientAxios() {
 
     axiosInstance.interceptors.request.use(config => {
         if (typeof window !== "undefined") {
-            const buyerToken = localStorage.getItem('auction_token_buyer');
+            const token = localStorage.getItem(`auction_token_${role}`);
             if (config.headers) {
-                config.headers['Authorization'] = `Bearer ${buyerToken}`;
+                config.headers['Authorization'] = `Bearer ${token}`;
                 config.headers['Content-Type'] = 'application/json';
             }
         }

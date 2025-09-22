@@ -1,11 +1,11 @@
 'use client';
 import { createClientAxios } from "@/lib/axiosClient";
 import { useEffect, useState } from "react";
-import { Auction } from "../types/auction";
+import { Auction } from "@/app/entities/auction";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Item } from "../types/item";
+import { Item } from "../../../entities/item";
 import { useWebSocket } from "@/app/providers/socketProvider";
 
 export default function Bid({ auctionId }: { auctionId: string }) {

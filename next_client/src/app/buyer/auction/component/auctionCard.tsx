@@ -1,5 +1,5 @@
 import React from "react";
-import { Auction } from "../types/auction";
+import { Auction } from "@/app/entities/auction";
 
 interface AuctionCardProps {
   auction: Auction;
@@ -12,7 +12,6 @@ const AuctionCard: React.FC<AuctionCardProps> = ({ auction, onBidClick }) => (
       {auction.itemImage && (
         <img
           src={auction.itemImage}
-          alt={auction.itemName}
           className="card-img-top"
           style={{ height: 160, objectFit: "cover", borderTopLeftRadius: 16, borderTopRightRadius: 16 }}
         />

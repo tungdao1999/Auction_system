@@ -35,8 +35,40 @@ const getAuction = async (req, res) => {
     }
 };
 
+const getScheduledAuctions = async (req, res) => {
+    try {
+        const user = req.user;
+        console.log("user", user);
+        if (!user || user.role !== 'seller') {
+            return res.status(403).json({ message: 'Forbidden: Seller access only' });
+        }
+        const scheduledAuctions = await auctionService.getScheduledAuctions(user.id);
+        res.status(200).json(scheduledAuctions);
+    } catch (err) {
+        console.log('scheduled auction err', err);
+        res.status(400).json({ message: err.message });
+    }
+};
+
+const updateAuction = async (req, res) => {
+    try {
+        const auctionId = req.params.auctionId;
+        const auctionData = req.body;
+        const sellerId = req.user.id;
+        if (!auctionId) {
+            return res.status(400).json({ message: 'Invalid auction ID' });
+        }
+        const updatedAuction = await auctionService.updateAuction(auctionId, auctionData, sellerId);
+        res.status(200).json(updatedAuction);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 module.exports = {
     createAuction,
     getRunningAuction,
-    getAuction
+    getAuction,
+    getScheduledAuctions,
+    updateAuction
 };

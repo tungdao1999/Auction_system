@@ -5,6 +5,8 @@ const sellerAuthenticate = require('../middlewares/auth.seller.middleware');
 const buyerAuthenticate = require('../middlewares/auth.buyer.middleware');
 
 router.post('/createAuction', sellerAuthenticate, auctionController.createAuction);
+router.put('/:auctionId', sellerAuthenticate, auctionController.updateAuction);
+router.get('/scheduled', sellerAuthenticate, auctionController.getScheduledAuctions);
 router.get('/getRunningAuction', buyerAuthenticate, auctionController.getRunningAuction);
 router.get('/:auctionId', buyerAuthenticate, auctionController.getAuction);
 

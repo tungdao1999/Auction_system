@@ -1,7 +1,7 @@
 const { Item, sequelize, AuctionItem } = require('../database/index');
 const { Op } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
-const { ItemStatus } = require('../common/const');
+const { ItemStatus, AuctionItemStatus } = require('../common/const');
 
 const createItem = async (itemData) => {
     return await sequelize.transaction(async (t) => {
@@ -50,10 +50,40 @@ const getRelatedItems = async (auctionId) => {
     return result;
 }
 
+const findItemsBySellerId = async (sellerId) => {
+    return await Item.findAll({
+        where: { sellerId, status: ItemStatus.AVAILABLE },
+        order: [['createdAt', 'DESC']],
+    });
+}
+
+const createAuctionItem = async (auctionId, itemId, quantity, transaction = null) => {
+    return await AuctionItem.create({
+        auctionId,
+        itemId,
+        quantity,
+        addedAt: new Date(),
+        status: AuctionItemStatus.ADDED
+    },
+    { transaction });
+}
+
+const updateItem = async (item, transaction = null) => {
+    return await AuctionItem.update({
+        ...item,
+    }, { 
+        where: { id: item.id },
+        transaction
+    });
+}
+
 module.exports = { 
     createItem,
     getAllItems,
     findItemById,
     findAvailableItemById,
-    getRelatedItems
+    getRelatedItems,
+    findItemsBySellerId,
+    createAuctionItem,
+    updateItem
 }

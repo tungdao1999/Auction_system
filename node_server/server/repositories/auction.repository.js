@@ -1,4 +1,5 @@
-const { Auction, sequelize } = require('../database/index');
+const { AuctionStatus } = require('../common/const');
+const { Auction, sequelize, Seller } = require('../database/index');
 const { v4: uuidv4 } = require('uuid');
 
 const getAllAuctions = async () => {
@@ -8,14 +9,12 @@ const getAllAuctions = async () => {
 }
 
 // Create a new auction
-const createAuction = async (auctionData) => {
-    return await sequelize.transaction(async (t) => {
-        const auction = await Auction.create({
-            id: uuidv4(),
-            ...auctionData
-        }, { transaction: t });
-        return auction;
-    });
+const createAuction = async (auctionData, transaction) => {
+    const auction = await Auction.create({
+        id: uuidv4(),
+        ...auctionData
+    }, { transaction });
+    return auction;
 }
 
 const findAuctionById = async (auctionId) => {
@@ -62,9 +61,18 @@ const getRunningAuction = async () => {
     return results || null;
 };
 
+const getScheduledAuctions = async (sellerId) => {
+    const auctions = await Auction.findAll({
+        where: { sellerId: sellerId, status: AuctionStatus.PENDING },
+        order: [['startTime', 'ASC']],
+    });
+    return auctions;
+}
+
 module.exports = { 
     getAllAuctions,
     createAuction,
     findAuctionById,
-    getRunningAuction
+    getRunningAuction,
+    getScheduledAuctions
 }

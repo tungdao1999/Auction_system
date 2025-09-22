@@ -8,6 +8,7 @@ const authenticate = require("../middlewares/auth.middleware");
 router.get('/getAllItems', buyerAuthenticate, itemController.getAllItems);
 router.get("/getRelatedItems/:auctionId", authenticate, itemController.getRelatedItems);
 router.post('/createItem', sellerAuthenticate, itemController.createItem);
+router.get('/getItemBySeller', sellerAuthenticate, itemController.getItemBySeller);
 
 module.exports = router;
 

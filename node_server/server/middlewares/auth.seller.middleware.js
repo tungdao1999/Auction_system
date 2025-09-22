@@ -4,6 +4,7 @@ const { Roles } = require('../common/const');
 module.exports = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  console.log("token:", token);
 
   if (!token) return res.status(401).json({ error: 'Token missing' });
 
@@ -13,8 +14,10 @@ module.exports = (req, res, next) => {
       return res.status(403).json({ error: 'Forbidden: Seller access only' });
     }
     req.user = decoded; 
+    
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Invalid token' });
+    console.error('Token verification error:', error);
+    res.status(401).json({ error: 'Invalid seller token' });
   }
 };
