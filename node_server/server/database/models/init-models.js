@@ -3,6 +3,7 @@ var _admin = require("./admin");
 var _auction = require("./auction");
 var _auction_item = require("./auction_item");
 var _bid = require("./bid");
+var _bid_history = require("./bid_history");
 var _buyer = require("./buyer");
 var _item = require("./item");
 var _seller = require("./seller");
@@ -13,6 +14,7 @@ function initModels(sequelize) {
   var auction = _auction(sequelize, DataTypes);
   var auction_item = _auction_item(sequelize, DataTypes);
   var bid = _bid(sequelize, DataTypes);
+  var bid_history = _bid_history(sequelize, DataTypes);
   var buyer = _buyer(sequelize, DataTypes);
   var item = _item(sequelize, DataTypes);
   var seller = _seller(sequelize, DataTypes);
@@ -24,14 +26,20 @@ function initModels(sequelize) {
   auction.hasMany(auction_item, { as: "auction_items", foreignKey: "auctionId"});
   bid.belongsTo(auction, { as: "auction", foreignKey: "auctionId"});
   auction.hasMany(bid, { as: "bids", foreignKey: "auctionId"});
+  bid_history.belongsTo(auction, { as: "auction", foreignKey: "auctionId"});
+  auction.hasMany(bid_history, { as: "bid_histories", foreignKey: "auctionId"});
   bid.belongsTo(buyer, { as: "buyer", foreignKey: "buyerId"});
   buyer.hasMany(bid, { as: "bids", foreignKey: "buyerId"});
+  bid_history.belongsTo(buyer, { as: "buyer", foreignKey: "buyerId"});
+  buyer.hasMany(bid_history, { as: "bid_histories", foreignKey: "buyerId"});
   auction.belongsTo(item, { as: "item", foreignKey: "itemId"});
   item.hasMany(auction, { as: "auctions", foreignKey: "itemId"});
   auction_item.belongsTo(item, { as: "item", foreignKey: "itemId"});
   item.hasMany(auction_item, { as: "auction_items", foreignKey: "itemId"});
   bid.belongsTo(item, { as: "item", foreignKey: "itemId"});
   item.hasMany(bid, { as: "bids", foreignKey: "itemId"});
+  bid_history.belongsTo(item, { as: "item", foreignKey: "itemId"});
+  item.hasMany(bid_history, { as: "bid_histories", foreignKey: "itemId"});
   auction.belongsTo(seller, { as: "seller", foreignKey: "sellerId"});
   seller.hasMany(auction, { as: "auctions", foreignKey: "sellerId"});
   item.belongsTo(seller, { as: "seller", foreignKey: "sellerId"});
@@ -46,6 +54,7 @@ function initModels(sequelize) {
     auction,
     auction_item,
     bid,
+    bid_history,
     buyer,
     item,
     seller,

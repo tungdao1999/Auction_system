@@ -54,6 +54,10 @@ const ChooseItemsModal: React.FC<ChooseItemsModalProps> = ({ show, handleClose, 
                                                 itemMap.set(item, quantity);
                                                 setItemMap(new Map(itemMap));
                                             }}
+                                            onDeselect={() => {
+                                                itemMap.delete(item);
+                                                setItemMap(new Map(itemMap));
+                                            }}
                                         />
                                     </div>
                                 ))}

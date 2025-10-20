@@ -68,8 +68,23 @@ const createAuctionItem = async (auctionId, itemId, quantity, transaction = null
     { transaction });
 }
 
-const updateItem = async (item, transaction = null) => {
+const updateAuctionItem = async (item, transaction = null) => {
     return await AuctionItem.update({
+        ...item,
+    }, { 
+        where: { id: item.id },
+        transaction
+    });
+}
+
+const findItemsByAuctionId = async (auctionId) => {
+    return await AuctionItem.findAll({
+        where: { auctionId }
+    });
+}
+
+const updateItem = async (item, transaction = null) => {
+    return await Item.update({
         ...item,
     }, { 
         where: { id: item.id },
@@ -85,5 +100,7 @@ module.exports = {
     getRelatedItems,
     findItemsBySellerId,
     createAuctionItem,
+    updateAuctionItem,
+    findItemsByAuctionId,
     updateItem
 }

@@ -1,10 +1,14 @@
 import { Item } from "@/app/entities/item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 
-const ItemCard: React.FC<{ item: Item, selected: boolean, onSelect: (quantity: number) => void }> = ({ item, selected, onSelect }) => {
-    const [quantity, setQuantity] = useState(1);
-    const [selectedState, setSelectedState] = useState(selected);
+const ItemCard: React.FC<{ item: Item, selected: boolean, onSelect: (quantity: number) => void, onDeselect: () => void }> = ({ item, selected, onSelect, onDeselect }) => {
+    const [quantity, setQuantity] = useState(0);
+    const [selectedState, setSelectedState] = useState<boolean>(false);
+    useEffect(() => {
+        setQuantity(item.quantity);
+        setSelectedState(selected);
+    }, [item, selected]);
     return (
         <div className="card mt-3 ms-3" style={{ width: '18rem' }}>
             <img src={item.image} className="card-img-top" alt={item.name} style={{ height: 180, objectFit: 'cover' }} />
@@ -27,7 +31,11 @@ const ItemCard: React.FC<{ item: Item, selected: boolean, onSelect: (quantity: n
                             variant={selectedState ? "success" : "primary"}
                             onClick={() => {
                                 setSelectedState(!selectedState);
-                                onSelect(quantity);
+                                if (selectedState) {
+                                    onDeselect();
+                                } else {
+                                    onSelect(quantity);
+                                }
                             }}
                             disabled={quantity < 1 || quantity > item.quantity}
                         >
